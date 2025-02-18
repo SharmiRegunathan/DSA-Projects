@@ -4,10 +4,34 @@ import java.util.*;
 
 public class Array_Easy {
     public static void main(String[] args) {
+        int[] arr = {3,4,9};
+        System.out.println(Arrays.toString(arrayTransform(arr)));
 //        int[][] mat = {{1,2},{3,4}};
 //        System.out.println(Arrays.toString(matrix(mat,2,4)));
     }
 
+    public static int[] arrayTransform(int[] arr){
+        int n = arr.length;
+
+        for(int i = 0; i < n; i++){
+            arr = transform(arr);
+        }
+
+        return arr;
+    }
+
+    public static int[] transform(int[] arr){
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] % 2 != 0){
+                arr[i] += 3;
+            }
+            else if(arr[i] % 2 == 0){
+                arr[i] -= 3;
+            }
+        }
+
+        return arr;
+    }
 
     public static int[][] reshapeMatrix(int[][] mat, int r, int c) {
         int[][] res = new int[r][c];

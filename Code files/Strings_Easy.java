@@ -2,7 +2,49 @@ import java.util.Stack;
 
 public class Strings_Easy {
     public static void main(String[] args) {
+        String a = "ulacfd";
+        String b = "jizalu";
+        System.out.println(checkPalindromeFormation(a,b));
+        //System.out.println(ispalindrome("abc"));
+    }
 
+    public static boolean checkPalindromeFormation(String a, String b) {
+        int n = a.length();
+
+        for(int i = 0; i < a.length()+1; i++){
+            String a_prefix = a.substring(0,i);
+            String a_suffix = a.substring(i,n);
+
+            String b_prefix = b.substring(0,i);
+            String b_suffix = b.substring(i,n);
+
+
+            if(ispalindrome(a_prefix + b_suffix) ||ispalindrome(b_prefix + a_suffix)) return true;
+        }
+        return false;
+    }
+
+    public static boolean ispalindrome(String str){
+        if(str.equals(rev(str))) return true;
+        else return false;
+    }
+
+    public static String rev(String str){
+        char[] arr = str.toCharArray();
+
+        int s = 0;
+        int e = str.length()-1;
+
+        while(s<=e){
+            char temp = arr[s];
+            arr[s] = arr[e];
+            arr[e] = temp;
+
+            s++;
+            e--;
+        }
+
+        return new String(arr);
     }
 
     //reverse each word in a sentence

@@ -1,6 +1,59 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Searching {
     public static void main(String[] args) {
+        //Hello
+        int[][] arr = {{10,20,30,40},{15,25,35,45},{28,29,37,47},{33,34,39,50}};
+        System.out.println(Arrays.toString(searchIn2D(arr,35)));
+    }
 
+    public static int[] searchIn2D(int[][] arr, int target){
+        int[] ans = {-1,-1};
+
+        int lb = 0;
+        int ub = arr[0].length-1;
+
+        while(lb < arr.length && ub >= 0){
+            if(arr[lb][ub] == target){
+                ans[0] = lb;
+                ans[1] = ub;
+                return ans;
+            }else if(arr[lb][ub] < target){
+                lb++;
+            }else{
+                ub--;
+            }
+        }
+        return ans;
+    }
+
+    public static int findKthPositive(int[] arr, int k) {
+        List<Integer> ls = new ArrayList<>();
+
+        for(int i = 1; i < arr[0]; i++){
+            ls.add(i);
+        }
+        for(int i = 0; i < arr.length-1; i++){
+            int elem = arr[i];
+            int next = arr[i+1];
+
+            for(int j = elem+1; j < next; j++){
+                ls.add(j);
+            }
+        }
+
+        int lastElem = arr[arr.length-1]+1;
+        int limit = k;
+        if(ls.size() < limit){
+            while(limit>0){
+                ls.add(lastElem++);
+                limit--;
+            }
+        }
+
+        return ls.get(k-1);
     }
 
     static boolean linearSearch(int[] arr, int elem) {
